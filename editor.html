@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renal Hospital Game - Scenario Editor</title>
+    <link rel="stylesheet" href="editor-styles.css">
+</head>
+<body>
+    <div class="editor-container">
+        <header>
+            <h1>Scenario & Intervention Editor</h1>
+            <div class="header-buttons">
+                <button id="backToGame" class="btn btn-secondary">← Back to Game</button>
+                <button id="exportData" class="btn btn-primary">Export Data</button>
+            </div>
+        </header>
+
+        <div class="editor-tabs">
+            <button class="tab-btn active" data-tab="scenario">New Scenario</button>
+            <button class="tab-btn" data-tab="intervention">New Intervention</button>
+            <button class="tab-btn" data-tab="preview">Preview & Export</button>
+        </div>
+
+        <!-- Scenario Tab -->
+        <div id="scenario-tab" class="tab-content active">
+            <h2>Create New Scenario</h2>
+            
+            <div class="form-section">
+                <h3>Basic Information</h3>
+                <div class="form-group">
+                    <label for="scenarioId">Scenario ID:</label>
+                    <input type="text" id="scenarioId" placeholder="e.g., aki_postop">
+                </div>
+                
+                <div class="form-group">
+                    <label for="scenarioTitle">Title:</label>
+                    <input type="text" id="scenarioTitle" placeholder="e.g., Post-Operative Acute Kidney Injury">
+                </div>
+                
+                <div class="form-group">
+                    <label for="scenarioDescription">Description:</label>
+                    <textarea id="scenarioDescription" rows="4" placeholder="Detailed clinical scenario description..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Patient Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Patient Name:</label>
+                        <input type="text" id="patientName" placeholder="e.g., John Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="patientAge">Age:</label>
+                        <input type="number" id="patientAge" min="1" max="120" placeholder="65">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="patientGender">Gender:</label>
+                        <select id="patientGender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Game Parameters</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="initialBudget">Initial Budget ($):</label>
+                        <input type="number" id="initialBudget" min="1000" max="20000" step="100" placeholder="5000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="initialHealth">Initial Health (%):</label>
+                        <input type="number" id="initialHealth" min="1" max="100" placeholder="65">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetHealth">Target Health (%):</label>
+                        <input type="number" id="targetHealth" min="1" max="100" placeholder="85">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeLimit">Time Limit (hours):</label>
+                        <input type="number" id="timeLimit" min="6" max="72" placeholder="24">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deteriorationRate">Deterioration Rate:</label>
+                        <input type="number" id="deteriorationRate" min="0.5" max="5" step="0.1" placeholder="2.0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Initial Vital Signs</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bloodPressure">Blood Pressure:</label>
+                        <input type="text" id="bloodPressure" placeholder="160/95">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="heartRate">Heart Rate (bpm):</label>
+                        <input type="number" id="heartRate" min="40" max="200" placeholder="88">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="temperature">Temperature (°F):</label>
+                        <input type="number" id="temperature" min="95" max="108" step="0.1" placeholder="99.2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="respiratoryRate">Respiratory Rate (/min):</label>
+                        <input type="number" id="respiratoryRate" min="8" max="40" placeholder="18">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Initial Laboratory Values</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="creatinine">Creatinine (mg/dL):</label>
+                        <input type="number" id="creatinine" min="0.1" max="15" step="0.1" placeholder="3.2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bun">BUN (mg/dL):</label>
+                        <input type="number" id="bun" min="5" max="200" placeholder="45">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gfr">GFR (mL/min):</label>
+                        <input type="number" id="gfr" min="5" max="150" placeholder="25">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="potassium">Potassium (mEq/L):</label>
+                        <input type="number" id="potassium" min="2" max="8" step="0.1" placeholder="5.2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sodium">Sodium (mEq/L):</label>
+                        <input type="number" id="sodium" min="120" max="160" placeholder="135">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hemoglobin">Hemoglobin (g/dL):</label>
+                        <input type="number" id="hemoglobin" min="4" max="20" step="0.1" placeholder="10.8">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Available Interventions</h3>
+                <div class="intervention-checkboxes" id="availableInterventions">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Intervention Modifiers (Scenario-Specific Effects)</h3>
+                <p class="help-text">Define how interventions work differently in this specific scenario compared to their default effects.</p>
+                <div id="interventionModifiers">
+                    <!-- Will be populated dynamically -->
+                </div>
+                <button type="button" id="addModifier" class="btn btn-secondary">Add Intervention Modifier</button>
+            </div>
+
+            <button id="addScenario" class="btn btn-success">Add Scenario</button>
+        </div>
+
+        <!-- Intervention Tab -->
+        <div id="intervention-tab" class="tab-content">
+            <h2>Create New Intervention</h2>
+            
+            <div class="form-section">
+                <h3>Basic Information</h3>
+                <div class="form-group">
+                    <label for="interventionId">Intervention ID:</label>
+                    <input type="text" id="interventionId" placeholder="e.g., nephrology_consult">
+                </div>
+                
+                <div class="form-group">
+                    <label for="interventionName">Name:</label>
+                    <input type="text" id="interventionName" placeholder="e.g., Nephrology Consultation">
+                </div>
+                
+                <div class="form-group">
+                    <label for="interventionDescription">Description:</label>
+                    <textarea id="interventionDescription" rows="3" placeholder="Detailed description of the intervention..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="interventionCost">Cost ($):</label>
+                        <input type="number" id="interventionCost" min="10" max="5000" step="10" placeholder="300">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeRequired">Time Required (hours):</label>
+                        <input type="number" id="timeRequired" min="1" max="24" placeholder="2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Primary Effects</h3>
+                <div id="primaryEffects">
+                    <div class="effect-row">
+                        <select class="effect-parameter">
+                            <option value="">Select parameter...</option>
+                            <option value="health">Health</option>
+                            <option value="creatinine">Creatinine</option>
+                            <option value="bun">BUN</option>
+                            <option value="gfr">GFR</option>
+                            <option value="potassium">Potassium</option>
+                            <option value="sodium">Sodium</option>
+                            <option value="hemoglobin">Hemoglobin</option>
+                            <option value="heartRate">Heart Rate</option>
+                            <option value="respiratoryRate">Respiratory Rate</option>
+                            <option value="bloodPressure">Blood Pressure</option>
+                        </select>
+                        <input type="number" class="effect-value" step="0.1" placeholder="Effect value">
+                        <button type="button" class="btn-small btn-remove">Remove</button>
+                    </div>
+                </div>
+                <button id="addPrimaryEffect" class="btn btn-secondary">Add Effect</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Negative Effects (Optional)</h3>
+                <div id="negativeEffects">
+                    <div class="effect-row">
+                        <select class="negative-parameter">
+                            <option value="">Select parameter...</option>
+                            <option value="health">Health</option>
+                            <option value="creatinine">Creatinine</option>
+                            <option value="bun">BUN</option>
+                            <option value="gfr">GFR</option>
+                            <option value="potassium">Potassium</option>
+                            <option value="sodium">Sodium</option>
+                            <option value="hemoglobin">Hemoglobin</option>
+                            <option value="heartRate">Heart Rate</option>
+                            <option value="respiratoryRate">Respiratory Rate</option>
+                        </select>
+                        <input type="number" class="negative-value" step="0.1" placeholder="Negative effect value">
+                        <button type="button" class="btn-small btn-remove">Remove</button>
+                    </div>
+                </div>
+                <button id="addNegativeEffect" class="btn btn-secondary">Add Negative Effect</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Cumulative Effects (Optional)</h3>
+                <div class="form-group">
+                    <label for="cumulativeDuration">Duration (hours):</label>
+                    <input type="number" id="cumulativeDuration" min="1" max="48" placeholder="6">
+                </div>
+                <div id="cumulativeEffects">
+                    <div class="effect-row">
+                        <select class="cumulative-parameter">
+                            <option value="">Select parameter...</option>
+                            <option value="health">Health</option>
+                            <option value="creatinine">Creatinine</option>
+                            <option value="bun">BUN</option>
+                            <option value="gfr">GFR</option>
+                            <option value="potassium">Potassium</option>
+                            <option value="sodium">Sodium</option>
+                            <option value="hemoglobin">Hemoglobin</option>
+                        </select>
+                        <input type="number" class="cumulative-value" step="0.1" placeholder="Per-hour effect">
+                        <button type="button" class="btn-small btn-remove">Remove</button>
+                    </div>
+                </div>
+                <button id="addCumulativeEffect" class="btn btn-secondary">Add Cumulative Effect</button>
+            </div>
+
+            <button id="addIntervention" class="btn btn-success">Add Intervention</button>
+        </div>
+
+        <!-- Preview Tab -->
+        <div id="preview-tab" class="tab-content">
+            <h2>Preview & Export</h2>
+            
+            <div class="preview-section">
+                <h3>Created Scenarios</h3>
+                <div id="scenariosList" class="items-list">
+                    <p class="empty-message">No scenarios created yet.</p>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <h3>Created Interventions</h3>
+                <div id="interventionsList" class="items-list">
+                    <p class="empty-message">No interventions created yet.</p>
+                </div>
+            </div>
+
+            <div class="export-section">
+                <h3>Export Options</h3>
+                <button id="exportJson" class="btn btn-primary">Export as JSON</button>
+                <button id="copyToClipboard" class="btn btn-secondary">Copy to Clipboard</button>
+                <button id="clearAll" class="btn btn-danger">Clear All</button>
+            </div>
+
+            <div class="json-output">
+                <h3>JSON Output</h3>
+                <textarea id="jsonOutput" readonly rows="20" placeholder="Your exported JSON will appear here..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="editor.js"></script>
+</body>
+</html>

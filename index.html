@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renal Hospital Management Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Renal Hospital Management Game</h1>
+            <div class="clock" id="clock">
+                <div class="time-display" id="timeDisplay">08:00</div>
+                <div class="clock-face">
+                    <div class="hour-hand" id="hourHand"></div>
+                    <div class="minute-hand" id="minuteHand"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-board">
+            <div class="left-panel">
+                <div class="scenario-section">
+                    <h2>Patient Scenario</h2>
+                    <div id="scenarioText" class="scenario-text"></div>
+                    <div class="patient-info">
+                        <h3>Patient: <span id="patientName"></span></h3>
+                        <p>Age: <span id="patientAge"></span> | Gender: <span id="patientGender"></span></p>
+                    </div>
+                </div>
+
+                <div class="resources-section">
+                    <h2>Resources</h2>
+                    <div class="resource-bar">
+                        <label>Budget: $<span id="currentBudget">0</span> / $<span id="totalBudget">0</span></label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="budgetProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interventions-section">
+                    <h2>Interventions</h2>
+                    <select id="interventionSelect" class="intervention-select">
+                        <option value="">Select an intervention...</option>
+                    </select>
+                    <button id="performIntervention" class="intervention-btn" disabled>Perform Intervention</button>
+                    <div id="interventionCost" class="intervention-cost"></div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="health-status">
+                    <h2>Patient Health Status</h2>
+                    <div class="health-indicator">
+                        <div class="health-bar">
+                            <div class="health-fill" id="healthFill"></div>
+                        </div>
+                        <span id="healthPercent">100%</span>
+                    </div>
+                    <div class="status-text" id="statusText">Stable</div>
+                </div>
+
+                <div class="vital-signs">
+                    <h3>Vital Signs</h3>
+                    <div class="vitals-grid">
+                        <div class="vital-item">
+                            <label>Blood Pressure:</label>
+                            <span id="bloodPressure">120/80</span>
+                        </div>
+                        <div class="vital-item">
+                            <label>Heart Rate:</label>
+                            <span id="heartRate">72 bpm</span>
+                        </div>
+                        <div class="vital-item">
+                            <label>Temperature:</label>
+                            <span id="temperature">98.6°F</span>
+                        </div>
+                        <div class="vital-item">
+                            <label>Respiratory Rate:</label>
+                            <span id="respiratoryRate">16/min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-results">
+                    <h3>Laboratory Results</h3>
+                    <div class="lab-grid">
+                        <div class="lab-item">
+                            <label>Creatinine:</label>
+                            <span id="creatinine">1.0 mg/dL</span>
+                        </div>
+                        <div class="lab-item">
+                            <label>BUN:</label>
+                            <span id="bun">15 mg/dL</span>
+                        </div>
+                        <div class="lab-item">
+                            <label>GFR:</label>
+                            <span id="gfr">90 mL/min</span>
+                        </div>
+                        <div class="lab-item">
+                            <label>Potassium:</label>
+                            <span id="potassium">4.0 mEq/L</span>
+                        </div>
+                        <div class="lab-item">
+                            <label>Sodium:</label>
+                            <span id="sodium">140 mEq/L</span>
+                        </div>
+                        <div class="lab-item">
+                            <label>Hemoglobin:</label>
+                            <span id="hemoglobin">12.0 g/dL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-log">
+            <h3>Action Log</h3>
+            <div id="actionLog" class="log-content"></div>
+        </div>
+
+        <div class="game-controls">
+            <button id="newGameBtn" class="control-btn">New Game</button>
+            <button id="pauseBtn" class="control-btn">Pause</button>
+            <a href="editor.html" class="control-btn" style="text-decoration: none;">Scenario Editor</a>
+        </div>
+    </div>
+
+    <div id="gameOverModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">Game Over</h2>
+            <p id="gameOverMessage"></p>
+            <button id="restartBtn" class="control-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

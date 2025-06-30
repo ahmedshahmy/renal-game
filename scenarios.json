@@ -1,0 +1,288 @@
+{
+  "scenarios": [
+    {
+      "id": "acute_kidney_injury",
+      "title": "Acute Kidney Injury",
+      "patient": {
+        "name": "Sarah Johnson",
+        "age": 45,
+        "gender": "Female"
+      },
+      "description": "A 45-year-old female presents to the emergency department with decreased urine output, nausea, and fatigue for the past 3 days. She recently underwent major abdominal surgery and has been taking NSAIDs for pain management. Her creatinine has risen from baseline 1.0 mg/dL to 3.2 mg/dL.",
+      "initialBudget": 5000,
+      "initialHealth": 65,
+      "targetHealth": 85,
+      "timeLimit": 24,
+      "initialVitals": {
+        "bloodPressure": "160/95",
+        "heartRate": 88,
+        "temperature": 99.2,
+        "respiratoryRate": 18
+      },
+      "initialLabs": {
+        "creatinine": 3.2,
+        "bun": 45,
+        "gfr": 25,
+        "potassium": 5.2,
+        "sodium": 135,
+        "hemoglobin": 10.8
+      },
+      "deteriorationRate": 2,
+      "winCondition": "Stabilize kidney function and achieve target health"
+    },
+    {
+      "id": "chronic_kidney_disease",
+      "title": "Chronic Kidney Disease Stage 4",
+      "patient": {
+        "name": "Robert Martinez",
+        "age": 62,
+        "gender": "Male"
+      },
+      "description": "A 62-year-old male with diabetes and hypertension presents with worsening fatigue, shortness of breath, and decreased appetite. His GFR has declined to 22 mL/min/1.73m². He has protein in his urine and signs of fluid overload. Needs preparation for renal replacement therapy.",
+      "initialBudget": 8000,
+      "initialHealth": 45,
+      "targetHealth": 75,
+      "timeLimit": 48,
+      "initialVitals": {
+        "bloodPressure": "145/90",
+        "heartRate": 92,
+        "temperature": 98.8,
+        "respiratoryRate": 20
+      },
+      "initialLabs": {
+        "creatinine": 4.8,
+        "bun": 68,
+        "gfr": 22,
+        "potassium": 5.8,
+        "sodium": 138,
+        "hemoglobin": 9.2
+      },
+      "deteriorationRate": 1.5,
+      "winCondition": "Stabilize patient and prepare for dialysis"
+    },
+    {
+      "id": "diabetic_nephropathy",
+      "title": "Diabetic Nephropathy Crisis",
+      "patient": {
+        "name": "Maria Garcia",
+        "age": 58,
+        "gender": "Female"
+      },
+      "description": "A 58-year-old female with poorly controlled Type 2 diabetes presents with severe proteinuria, hypertension, and declining kidney function. Blood glucose is poorly controlled at 280 mg/dL. She has significant edema and shortness of breath.",
+      "initialBudget": 6500,
+      "initialHealth": 55,
+      "targetHealth": 80,
+      "timeLimit": 36,
+      "initialVitals": {
+        "bloodPressure": "170/100",
+        "heartRate": 95,
+        "temperature": 98.4,
+        "respiratoryRate": 22
+      },
+      "initialLabs": {
+        "creatinine": 2.8,
+        "bun": 52,
+        "gfr": 35,
+        "potassium": 4.8,
+        "sodium": 142,
+        "hemoglobin": 10.2
+      },
+      "deteriorationRate": 2.5,
+      "winCondition": "Control diabetes and stabilize kidney function"
+    }
+  ],
+  "interventions": [
+    {
+      "id": "iv_fluids",
+      "name": "IV Fluid Resuscitation",
+      "description": "Administer normal saline or balanced crystalloids",
+      "cost": 200,
+      "effects": {
+        "health": 8,
+        "creatinine": -0.3,
+        "bun": -5,
+        "gfr": 3,
+        "bloodPressure": "increase_systolic_5"
+      },
+      "contraindications": ["fluid_overload"],
+      "timeRequired": 2
+    },
+    {
+      "id": "diuretics",
+      "name": "Loop Diuretics (Furosemide)",
+      "description": "Administer furosemide for diuresis and fluid removal",
+      "cost": 150,
+      "effects": {
+        "health": 6,
+        "potassium": -0.4,
+        "sodium": 2,
+        "bloodPressure": "decrease_both_10"
+      },
+      "contraindications": ["severe_dehydration"],
+      "timeRequired": 1
+    },
+    {
+      "id": "ace_inhibitor",
+      "name": "ACE Inhibitor",
+      "description": "Start or increase ACE inhibitor for renal protection",
+      "cost": 100,
+      "effects": {
+        "health": 10,
+        "bloodPressure": "decrease_both_15",
+        "gfr": 2,
+        "potassium": 0.3
+      },
+      "contraindications": ["hyperkalemia"],
+      "timeRequired": 1
+    },
+    {
+      "id": "insulin_therapy",
+      "name": "Insulin Therapy",
+      "description": "Optimize glucose control with insulin",
+      "cost": 250,
+      "effects": {
+        "health": 12,
+        "creatinine": -0.2,
+        "potassium": -0.5,
+        "gfr": 4
+      },
+      "contraindications": ["hypoglycemia"],
+      "timeRequired": 2
+    },
+    {
+      "id": "hemodialysis",
+      "name": "Emergency Hemodialysis",
+      "description": "Initiate emergent hemodialysis",
+      "cost": 1500,
+      "effects": {
+        "health": 25,
+        "creatinine": -1.5,
+        "bun": -25,
+        "potassium": -1.8,
+        "sodium": 0
+      },
+      "contraindications": ["hemodynamic_instability"],
+      "timeRequired": 4
+    },
+    {
+      "id": "sodium_bicarbonate",
+      "name": "Sodium Bicarbonate",
+      "description": "Correct metabolic acidosis",
+      "cost": 120,
+      "effects": {
+        "health": 7,
+        "sodium": 3,
+        "respiratoryRate": -2
+      },
+      "contraindications": ["alkalosis"],
+      "timeRequired": 1
+    },
+    {
+      "id": "kayexalate",
+      "name": "Sodium Polystyrene Sulfonate",
+      "description": "Treat hyperkalemia with potassium binder",
+      "cost": 180,
+      "effects": {
+        "health": 8,
+        "potassium": -1.2,
+        "sodium": 1
+      },
+      "contraindications": ["bowel_obstruction"],
+      "timeRequired": 2
+    },
+    {
+      "id": "erythropoietin",
+      "name": "Erythropoietin Stimulating Agent",
+      "description": "Treat anemia associated with CKD",
+      "cost": 400,
+      "effects": {
+        "health": 6,
+        "hemoglobin": 1.5
+      },
+      "contraindications": ["uncontrolled_hypertension"],
+      "timeRequired": 1
+    },
+    {
+      "id": "phosphate_binder",
+      "name": "Phosphate Binder",
+      "description": "Control phosphate levels in CKD",
+      "cost": 160,
+      "effects": {
+        "health": 4,
+        "calcium": 0.3
+      },
+      "contraindications": ["hypercalcemia"],
+      "timeRequired": 1
+    },
+    {
+      "id": "calcium_gluconate",
+      "name": "Calcium Gluconate",
+      "description": "Cardioprotective agent for severe hyperkalemia",
+      "cost": 80,
+      "effects": {
+        "health": 5,
+        "heartRate": -8
+      },
+      "contraindications": ["hypercalcemia"],
+      "timeRequired": 1
+    },
+    {
+      "id": "blood_transfusion",
+      "name": "Blood Transfusion",
+      "description": "Transfuse packed red blood cells for severe anemia",
+      "cost": 800,
+      "effects": {
+        "health": 15,
+        "hemoglobin": 2.5,
+        "heartRate": -10
+      },
+      "contraindications": ["fluid_overload", "iron_overload"],
+      "timeRequired": 3
+    },
+    {
+      "id": "nutritional_counseling",
+      "name": "Renal Diet Counseling",
+      "description": "Dietary modification for kidney disease",
+      "cost": 150,
+      "effects": {
+        "health": 5,
+        "potassium": -0.2,
+        "bun": -3
+      },
+      "contraindications": ["severe_malnutrition"],
+      "timeRequired": 1
+    }
+  ],
+  "normalRanges": {
+    "creatinine": {
+      "min": 0.6,
+      "max": 1.2,
+      "unit": "mg/dL"
+    },
+    "bun": {
+      "min": 7,
+      "max": 20,
+      "unit": "mg/dL"
+    },
+    "gfr": {
+      "min": 90,
+      "max": 120,
+      "unit": "mL/min"
+    },
+    "potassium": {
+      "min": 3.5,
+      "max": 5.0,
+      "unit": "mEq/L"
+    },
+    "sodium": {
+      "min": 136,
+      "max": 145,
+      "unit": "mEq/L"
+    },
+    "hemoglobin": {
+      "min": 12.0,
+      "max": 16.0,
+      "unit": "g/dL"
+    }
+  }
+}

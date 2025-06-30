@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Scenario Creation</title>
+</head>
+<body>
+    <h1>Test: Add Scenario to localStorage</h1>
+    <button onclick="addTestScenario()">Add Test Scenario</button>
+    <button onclick="checkStorage()">Check Storage</button>
+    <button onclick="clearStorage()">Clear Storage</button>
+    <div id="output"></div>
+
+    <script>
+        function addTestScenario() {
+            const testScenario = {
+                id: "test_scenario_123",
+                title: "Test Renal Emergency",
+                patient: {
+                    name: "Test Patient",
+                    age: 55,
+                    gender: "Female"
+                },
+                description: "This is a test scenario created to verify localStorage integration works correctly.",
+                initialBudget: 4000,
+                initialHealth: 50,
+                targetHealth: 80,
+                timeLimit: 24,
+                initialVitals: {
+                    bloodPressure: "150/90",
+                    heartRate: 85,
+                    temperature: 98.6,
+                    respiratoryRate: 16
+                },
+                initialLabs: {
+                    creatinine: 2.5,
+                    bun: 40,
+                    gfr: 30,
+                    potassium: 4.8,
+                    sodium: 140,
+                    hemoglobin: 11.0
+                },
+                deteriorationRate: 2,
+                availableInterventions: ["iv_fluids", "diuretics", "ace_inhibitor"],
+                winCondition: "Test scenario completion"
+            };
+
+            const existingScenarios = JSON.parse(localStorage.getItem('renalGameScenarios') || '[]');
+            existingScenarios.push(testScenario);
+            localStorage.setItem('renalGameScenarios', JSON.stringify(existingScenarios));
+            
+            document.getElementById('output').innerHTML = '<p style="color: green;">Test scenario added to localStorage!</p>';
+        }
+
+        function checkStorage() {
+            const scenarios = localStorage.getItem('renalGameScenarios');
+            const interventions = localStorage.getItem('renalGameInterventions');
+            
+            let output = '<h3>localStorage Contents:</h3>';
+            output += '<p><strong>Scenarios:</strong> ' + (scenarios ? JSON.parse(scenarios).length + ' found' : 'None') + '</p>';
+            output += '<p><strong>Interventions:</strong> ' + (interventions ? JSON.parse(interventions).length + ' found' : 'None') + '</p>';
+            
+            if (scenarios) {
+                const scenarioList = JSON.parse(scenarios);
+                output += '<p><strong>Scenario IDs:</strong> ' + scenarioList.map(s => s.id).join(', ') + '</p>';
+            }
+            
+            document.getElementById('output').innerHTML = output;
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('renalGameScenarios');
+            localStorage.removeItem('renalGameInterventions');
+            document.getElementById('output').innerHTML = '<p style="color: red;">localStorage cleared!</p>';
+        }
+    </script>
+</body>
+</html>

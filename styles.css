@@ -1,0 +1,496 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+/* Clock Styles */
+.clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-display {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    background: #ecf0f1;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.clock-face {
+    width: 80px;
+    height: 80px;
+    border: 4px solid #34495e;
+    border-radius: 50%;
+    position: relative;
+    background: white;
+}
+
+.clock-face::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #e74c3c;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.hour-hand, .minute-hand {
+    position: absolute;
+    background: #2c3e50;
+    transform-origin: bottom center;
+    border-radius: 2px;
+}
+
+.hour-hand {
+    width: 3px;
+    height: 25px;
+    top: 15px;
+    left: 50%;
+    margin-left: -1.5px;
+}
+
+.minute-hand {
+    width: 2px;
+    height: 35px;
+    top: 5px;
+    left: 50%;
+    margin-left: -1px;
+}
+
+/* Game Board Layout */
+.game-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Section Styles */
+.scenario-section, .resources-section, .interventions-section,
+.health-status, .vital-signs, .lab-results {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3498db;
+}
+
+.scenario-section {
+    border-left-color: #e74c3c;
+}
+
+.resources-section {
+    border-left-color: #f39c12;
+}
+
+.interventions-section {
+    border-left-color: #27ae60;
+}
+
+.health-status {
+    border-left-color: #e74c3c;
+}
+
+h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.3em;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 8px;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+/* Scenario Styles */
+.scenario-text {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    border-left: 3px solid #3498db;
+}
+
+.patient-info {
+    background: #e8f4fd;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.patient-info h3 {
+    margin-bottom: 5px;
+    color: #2980b9;
+}
+
+/* Resource Bar */
+.resource-bar label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Intervention Styles */
+.intervention-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.intervention-select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.intervention-btn {
+    width: 100%;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.intervention-btn:hover:not(:disabled) {
+    background: #229954;
+}
+
+.intervention-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.intervention-cost {
+    margin-top: 10px;
+    padding: 8px;
+    background: #fef9e7;
+    border-radius: 6px;
+    border-left: 3px solid #f39c12;
+    font-weight: 600;
+}
+
+/* Health Status */
+.health-indicator {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.health-bar {
+    flex: 1;
+    height: 30px;
+    background: #ecf0f1;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.health-fill {
+    height: 100%;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+    background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
+    background-size: 300% 100%;
+}
+
+.health-fill[data-health="high"] {
+    background-position: 100% 0;
+}
+
+.health-fill[data-health="medium"] {
+    background-position: 50% 0;
+}
+
+.health-fill[data-health="low"] {
+    background-position: 0% 0;
+}
+
+#healthPercent {
+    font-weight: bold;
+    font-size: 1.2em;
+    min-width: 60px;
+}
+
+.status-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.status-text.stable {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.status-text.deteriorating {
+    background: #fdeaea;
+    color: #e74c3c;
+}
+
+.status-text.critical {
+    background: #fadbd8;
+    color: #c0392b;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Vitals and Lab Results */
+.vitals-grid, .lab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.vital-item, .lab-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #95a5a6;
+}
+
+.vital-item label, .lab-item label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.vital-item span, .lab-item span {
+    font-weight: bold;
+    color: #34495e;
+}
+
+/* Abnormal values */
+.abnormal-high {
+    background: #fdeaea !important;
+    border-left-color: #e74c3c !important;
+}
+
+.abnormal-low {
+    background: #fef9e7 !important;
+    border-left-color: #f39c12 !important;
+}
+
+/* Action Log */
+.action-log {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #9b59b6;
+    margin-bottom: 20px;
+}
+
+.log-content {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.log-entry {
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
+    line-height: 1.4;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-time {
+    font-weight: bold;
+    color: #7f8c8d;
+    margin-right: 10px;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #2980b9;
+}
+
+.control-btn.pause {
+    background: #f39c12;
+}
+
+.control-btn.pause:hover {
+    background: #e67e22;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.modal-content p {
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #7f8c8d;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-board {
+        grid-template-columns: 1fr;
+    }
+    
+    .vitals-grid, .lab-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .clock {
+        scale: 0.8;
+    }
+    
+    .game-controls {
+        flex-wrap: wrap;
+    }
+}
